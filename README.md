@@ -1,7 +1,8 @@
 # VisionIST
+![Visionist](docs/logo.png)
 
-A thin, box-agnostic client and a browser front end for a fleet of **boxes** —
-independent Dockerized inference services that all speak one gRPC envelope.
+## A thin, box-agnostic client and a browser front end for a fleet of boxes
+A set of independent Dockerized inference services that all speak one gRPC envelope.
 
 ```protobuf
 service PipelineService { rpc Process( Envelope ) returns ( Envelope ); }
