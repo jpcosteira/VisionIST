@@ -1,0 +1,92 @@
+{
+  "entries": [
+    {
+      "id": "clip",
+      "name": "clip",
+      "addr": "clip:8061",
+      "def_id": "clip",
+      "note": "CLIP image and text embeddings with their cross-modal similarity",
+      "last_probe": null
+    },
+    {
+      "id": "features",
+      "name": "features",
+      "addr": "features:8061",
+      "def_id": "features",
+      "note": "SIFT keypoints in the SIFT-Extractor layout: (2+128) x N, annotated JPEGs, MATLAB .mat",
+      "last_probe": null
+    },
+    {
+      "id": "lang_sam",
+      "name": "lang_sam",
+      "addr": "lang_sam:8061",
+      "def_id": "lang_sam",
+      "note": "Text-guided segmentation with LangSAM: phrases in, masks out",
+      "last_probe": null
+    },
+    {
+      "id": "lightglue",
+      "name": "lightglue",
+      "addr": "lightglue:8061",
+      "def_id": "lightglue",
+      "note": "SuperPoint/DISK features and LightGlue matching, pairwise or as a sliding-window stream",
+      "last_probe": null
+    },
+    {
+      "id": "moge",
+      "name": "moge",
+      "addr": "moge:8061",
+      "def_id": "moge",
+      "note": "MoGe-3 monocular geometry: metric depth, point map, normals, intrinsics",
+      "last_probe": null
+    },
+    {
+      "id": "opencv",
+      "name": "opencv",
+      "addr": "opencv:8061",
+      "def_id": "opencv",
+      "note": "Classic feature extraction and matching: SIFT/ORB via FLANN, or SuperPoint/DISK via LightGlue, plus a RANSAC fundamental matrix",
+      "last_probe": null
+    },
+    {
+      "id": "sbert",
+      "name": "sbert",
+      "addr": "sbert:8061",
+      "def_id": "sbert",
+      "note": "Sentence-BERT text embeddings and their pairwise similarity",
+      "last_probe": null
+    },
+    {
+      "id": "tapnext",
+      "name": "tapnext",
+      "addr": "tapnext:8061",
+      "def_id": "tapnext",
+      "note": "TAPNext point tracking with the Tomasi-Kanade observation matrix",
+      "last_probe": null
+    },
+    {
+      "id": "unimatch",
+      "name": "unimatch",
+      "addr": "unimatch:8061",
+      "def_id": "unimatch",
+      "note": "Unified dense matching: optical flow, stereo disparity, and multi-view depth",
+      "last_probe": null
+    },
+    {
+      "id": "vggt",
+      "name": "vggt",
+      "addr": "vggt:8061",
+      "def_id": "vggt",
+      "note": "VGGT multi-view 3D reconstruction: world points, per-view depth, camera poses, and a GLB",
+      "last_probe": null
+    },
+    {
+      "id": "yolo",
+      "name": "yolo",
+      "addr": "yolo:8061",
+      "def_id": "yolo",
+      "note": "YOLO object detection with always-on tracking, on images or video",
+      "last_probe": null
+    }
+  ]
+}
