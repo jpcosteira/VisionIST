@@ -1,0 +1,27 @@
+# OS / editor
+.DS_Store
+*.asv
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Web UI (built inside the image; see webui/Dockerfile)
+node_modules/
+webui/web/dist/
+
+# Webui runtime state and local fleets
+webui/data/
+fleet/data/*.bak

@@ -9,6 +9,14 @@
       "last_probe": null
     },
     {
+      "id": "d4rt",
+      "name": "d4rt",
+      "addr": "d4rt:8061",
+      "def_id": "d4rt",
+      "note": "OpenD4RT 4D reconstruction and tracking - 3D point tracks, point clouds and camera poses from a video",
+      "last_probe": null
+    },
+    {
       "id": "features",
       "name": "features",
       "addr": "features:8061",

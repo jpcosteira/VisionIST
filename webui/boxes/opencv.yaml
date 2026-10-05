@@ -1,0 +1,64 @@
+# opencv box — classic feature extraction and matching.
+# Authoritative request shape: https://github.com/jpcosteira/VisionIST_Library/blob/main/boxes/opencv/README.md
+id: opencv
+name: "OpenCV · SIFT/ORB matching (or SuperPoint/DISK via LightGlue)"
+box_key: opencv
+docs: https://github.com/jpcosteira/VisionIST_Library/blob/main/boxes/opencv/README.md
+note: >
+  One image returns keypoints and descriptors. Two images also return the
+  RANSAC inlier matches (matches_inliers_a / _b, one point per row, the same
+  row in each is the same match) and the fundamental matrix. SIFT and ORB are
+  matched with FLANN; SUPERPOINT and DISK route through LightGlue and need
+  exactly two images. With one image the matching fields are absent.
+
+inputs:
+  - field: images
+    widget: image_upload
+    kind: bb
+    multiple: true
+    required: true
+    helper: one image (features only) or two images (features + matching)
+    constraint: "1 or 2 images; SUPERPOINT/DISK need exactly 2"
+
+command:
+  values: [match, reset]
+  default: match
+
+parameters:
+  - key: feature_extractor
+    widget: select
+    values: [SIFT, ORB, SUPERPOINT, DISK]
+    default: SIFT
+  - key: ratio_thresh
+    widget: slider
+    min: 0.5
+    max: 1.0
+    step: 0.01
+    default: 0.75
+    placeholder: "Lowe ratio test, FLANN path only (SIFT/ORB)"
+  - key: max_keypoints
+    widget: number
+    default: 500
+  - key: device
+    widget: select
+    values: ["cpu", "cuda"]
+    placeholder: "LightGlue path only; empty = automatic"
+
+results:
+  - field: keypoints
+    visualizer: tensor
+    caption: "keypoints (n_images, N, 2) as (x, y)"
+  - field: descriptors
+    visualizer: tensor
+    caption: "descriptors (n_images, N, D) — 128 for SIFT, 32 for ORB"
+  - field: matches_inliers_a
+    visualizer: tensor
+    caption: "RANSAC inlier points in image 1 (K, 2)"
+  - field: matches_inliers_b
+    visualizer: tensor
+    caption: "the matching inlier points in image 2 (K, 2)"
+  - field: fundamental_matrix
+    visualizer: matrix
+    caption: "fundamental matrix (3 × 3); empty when RANSAC had too few matches"
+  - field: "*"
+    visualizer: json

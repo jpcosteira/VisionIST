@@ -8,9 +8,9 @@ service PipelineService { rpc Process( Envelope ) returns ( Envelope ); }
 ```
 
 > **The boxes themselves live in
-> [VisionIST_Library](https://github.com/sipg-isr/VisionIST_Library).**
+> [VisionIST_Library](https://github.com/jpcosteira/VisionIST_Library).**
 > That registry holds one directory per box — Dockerfile, service source,
-> manifest — and publishes the images to GHCR and Docker Hub. This repository
+> manifest — and publishes the images to Docker Hub (`sipgisr/`). This repository
 > keeps the client, the webui, the documentation and a reference fleet
 > assembled from that registry. Nothing here is built from box source.
 
@@ -83,7 +83,7 @@ default), so adding a box never means finding a free port by hand.
 ## Key contracts
 
 - **Shared envelope** — one `pipeline.proto` for every box. It is maintained in
-  [VisionIST_Library/contract](https://github.com/sipg-isr/VisionIST_Library/tree/main/contract)
+  [VisionIST_Library/contract](https://github.com/jpcosteira/VisionIST_Library/tree/main/contract)
   and synced into each box from there.
 - **Config dispatch** — the request's `config_json` carries a section named
   after the box; `{"command": "reset"}` is accepted by every standard box.
@@ -107,7 +107,7 @@ Start at [docs/index.md](docs/index.md):
 ## Contributing
 
 A **new box** goes to
-[VisionIST_Library](https://github.com/sipg-isr/VisionIST_Library) — see its
+[VisionIST_Library](https://github.com/jpcosteira/VisionIST_Library) — see its
 CONTRIBUTING.md; `tools/new_box.py` there scaffolds one that already runs.
 
 Changes to the **client**, the **webui** or these **docs** belong here.

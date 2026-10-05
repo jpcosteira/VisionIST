@@ -1,0 +1,91 @@
+# d4rt box — 4D reconstruction and tracking from a video (Open-d4rt).
+# Authoritative request shape: https://github.com/jpcosteira/VisionIST_Library/blob/main/boxes/d4rt/README.md
+id: d4rt
+name: "D4RT · 3D point tracks, point clouds & cameras"
+box_key: d4rt
+docs: https://github.com/jpcosteira/VisionIST_Library/blob/main/boxes/d4rt/README.md
+note: >
+  A feedforward video transformer. Send a video, or frames of identical
+  size, and pick a command: track (3D positions of query pixels over time),
+  reconstruct (a per-frame point cloud) or cameras (intrinsics and poses).
+  Predictions are UP TO SCALE, not metres. The model sees at most one clip
+  (48 frames for the default checkpoint) — longer inputs are cut to
+  max_frames. About 1.16 B parameters: use a GPU.
+
+inputs:
+  - field: images
+    widget: video_frames
+    kind: bb
+    multiple: true
+    required: false
+    helper: >
+      a video (mp4/webm/mov) — frames are extracted in your browser — or
+      plain image files. Use this OR the video field below.
+    constraint: "at least 2 frames, all the same size; images and video are mutually exclusive"
+  - field: video
+    widget: file_upload
+    kind: b
+    required: false
+    helper: a single video file decoded by the box (alternative to images)
+
+command:
+  values: [track, reconstruct, cameras, reset]
+  default: track
+
+parameters:
+  - key: max_frames
+    widget: number
+    default: 48
+    placeholder: "cap on decoded frames (clip length: 48 default checkpoint, 32 the other)"
+  - key: frame_step
+    widget: number
+    default: 1
+    placeholder: "keep every Nth frame"
+  - key: grid_size
+    widget: slider
+    min: 4
+    max: 64
+    step: 2
+    default: 32
+    placeholder: "track: side of the query-pixel grid"
+  - key: t_src
+    widget: number
+    default: 0
+    placeholder: "track: the frame the query pixels are read from"
+  - key: point_grid_size
+    widget: slider
+    min: 8
+    max: 128
+    step: 8
+    default: 64
+    placeholder: "reconstruct: side of the sampling grid"
+  - key: max_points
+    widget: number
+    default: 4096
+    placeholder: "reconstruct: cap on points per frame"
+  - key: device
+    widget: select
+    values: ["cuda", "cpu"]
+    placeholder: "empty = automatic; CPU works but is impractical"
+
+results:
+  - field: tracks_xyz_ref0
+    visualizer: tensor
+    caption: "(Q, T, 3) track positions in the camera frame of frame 0 — use this for motion"
+  - field: tracks_uv
+    visualizer: tensor
+    caption: "(Q, T, 2) 2-D reprojection, normalised to [0, 1]"
+  - field: tracks_visibility
+    visualizer: tensor
+    caption: "(Q, T) visibility flags"
+  - field: points_xyz
+    visualizer: tensor
+    caption: "(T, P, 3) per-frame point cloud in the camera frame of frame 0"
+  - field: intrinsics
+    visualizer: tensor
+    caption: "(T, 3, 3) per-frame K"
+  - field: extrinsics
+    visualizer: tensor
+    caption: "(T, 4, 4) T_ref0_cam per frame"
+  - field: "*"
+    visualizer: json

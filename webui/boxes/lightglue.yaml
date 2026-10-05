@@ -1,0 +1,65 @@
+# lightglue box — SuperPoint/DISK features + LightGlue matching.
+# Authoritative request shape: https://github.com/jpcosteira/VisionIST_Library/blob/main/boxes/lightglue/README.md
+id: lightglue
+name: "LightGlue · SuperPoint/DISK matching"
+box_key: lightglue
+docs: https://github.com/jpcosteira/VisionIST_Library/blob/main/boxes/lightglue/README.md
+note: >
+  Pairwise matching: send two images, get keypoints per image and the
+  zero-based index pairs that LightGlue matched, with a confidence each.
+  The box also has a stateful sliding-window "stream" command (one frame
+  per call, session_id inside parameters); this console covers the
+  stateless pairwise case only — drive the stream from the client
+  (see the MATLAB vsTrackStream or visionist_client.tracking).
+
+inputs:
+  - field: images
+    widget: image_upload
+    kind: bb
+    multiple: true
+    required: true
+    helper: two images to match (one image returns keypoints only)
+    constraint: "at most 2 images; more is an error"
+
+command:
+  values: [match, reset]
+  default: match
+
+parameters:
+  - key: feature_extractor
+    widget: select
+    values: [SUPERPOINT, DISK]
+    default: SUPERPOINT
+  - key: max_keypoints
+    widget: number
+    default: 1024
+    placeholder: "minimum 8"
+  - key: filter_threshold
+    widget: slider
+    min: 0.0
+    max: 1.0
+    step: 0.01
+    placeholder: "match confidence cut (<= 1); empty = box default"
+  - key: device
+    widget: select
+    values: ["cpu", "cuda"]
+    placeholder: "empty = automatic"
+
+results:
+  - field: matches
+    visualizer: tensor
+    caption: "(M, 2) ZERO-based index pairs into keypoints[0] and keypoints[1]"
+  - field: confidence
+    visualizer: tensor
+    caption: "(M,) match confidence"
+  - field: keypoints
+    visualizer: tensor
+    caption: "(n_images, N, 2) as (x, y)"
+  - field: scores
+    visualizer: tensor
+    caption: "(n_images, N) keypoint scores"
+  - field: descriptors
+    visualizer: tensor
+    caption: "(n_images, N, D) descriptors"
+  - field: "*"
+    visualizer: json

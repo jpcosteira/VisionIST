@@ -99,11 +99,10 @@ def test_tapnext_session_injection(reg, store):
     assert spec.data["images"] == b"frame.jpg"
 
 
-def test_out_of_scope_boxes_absent(reg, store):
-    """opencv_box is skipped until it migrates to the shared envelope
-    (see README) — the registry is the source of truth."""
+def test_migrated_boxes_are_present(reg, store):
+    """opencv, lightglue and d4rt all speak the shared envelope now."""
     ids = {d.id for d in reg}
-    assert "opencv" not in ids
+    assert {"opencv", "lightglue", "d4rt"} <= ids
 
 
 # ------------------------------------------------------------------- strict

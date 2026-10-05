@@ -16,15 +16,7 @@ def reg():
 
 
 EXPECTED_IDS = {"clip", "tapnext", "lang_sam", "sbert", "vggt", "moge", "yolo",
-                "unimatch", "features"}
-
-
-def test_out_of_scope_boxes_are_absent(reg):
-    """opencv_box predates the shared envelope (Process) contract and is
-    intentionally skipped until it migrates — the webui stays contract-only.
-    Re-add its definition when the box does."""
-    ids = {d.id for d in reg}
-    assert "opencv" not in ids
+                "unimatch", "features", "opencv", "lightglue", "d4rt"}
 
 
 def test_all_defs_load(reg):
