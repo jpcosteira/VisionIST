@@ -6,6 +6,10 @@ A set of independent Dockerized inference services that all speak one gRPC envel
 
 This website provides the python client while the registry of boxes is in [Visionist_Library](http://github.com/jpcosteira/VisionIST_Library). For "old timers" and increased productivity we include a [Matlab Client](http://github.com/jpcosteira/VisionIST_matlab) 
 
+## How it works
+
+<img width="31698" height="10755" alt="visionist" src="https://github.com/user-attachments/assets/c2d68f72-5afa-4415-bec9-1c7c7a9b279f" />
+
 ```protobuf
 service PipelineService { rpc Process( Envelope ) returns ( Envelope ); }
 ```
