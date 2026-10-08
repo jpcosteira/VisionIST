@@ -23,7 +23,7 @@ service PipelineService { rpc Process( Envelope ) returns ( Envelope ); }
 from visionist_client import Visionist
 import pathlib
 
-b = Visionist("localhost:9061")                      # any box, by IP:port
+b = Visionist("some_server:port")                      # any box,ex 10.0.07:9067
 res = b.run(data   = {"images": [pathlib.Path("dog.jpg")]},
             config = {"lang_sam": {"command": "segment",
                                    "parameters": {"box_threshold": 0.3},
