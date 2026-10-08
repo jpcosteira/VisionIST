@@ -9,16 +9,11 @@ This website provides the python client while the registry of boxes is in [Visio
 ## How it works
 ![Visionist](docs/visionist.svg)
 
-``protobuf
+```protobuf
 service PipelineService { rpc Process( Envelope ) returns ( Envelope ); }
 ```
 
-> **The boxes themselves live in
-> [VisionIST_Library](https://github.com/jpcosteira/VisionIST_Library).**
-> That registry holds one directory per box — Dockerfile, service source,
-> manifest — and publishes the images to Docker Hub (`sipgisr/`). This repository
-> keeps the client, the webui, the documentation and a reference fleet
-> assembled from that registry. Nothing here is built from box source.
+**The boxes themselves live in [VisionIST_Library](https://github.com/jpcosteira/VisionIST_Library).** That registry holds one directory per box — Dockerfile, service source,manifest — and publishes the images to Docker Hub (`sipgisr/`). This repository keeps the client, the webui, the documentation and a reference fleetassembled from that registry. Nothing here is built from box source.
 
 ## Calling a box
 
